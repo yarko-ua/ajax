@@ -43,50 +43,20 @@ btnPrev.addEventListener('click', () => {
     if (num < 9) { btnNext.removeAttribute('disabled', 'disabled') };
 })
 
-// document.querySelector('#b1').addEventListener('click', () => {
-//     num = 1;
-//     getInfo();
-// })
-// document.querySelector('#b2').addEventListener('click', () => {
-//     num = 2;
-//     getInfo();
-// })
-// document.querySelector('#b3').addEventListener('click', () => {
-//     num = 3;
-//     getInfo();
-// })
-// document.querySelector('#b4').addEventListener('click', () => {
-//     num = 4;
-//     getInfo();
-// })
-// document.querySelector('#b5').addEventListener('click', () => {
-//     num = 5;
-//     getInfo();
-// })
-// document.querySelector('#b6').addEventListener('click', () => {
-//     num = 6;
-//     getInfo();
-// })
-// document.querySelector('#b7').addEventListener('click', () => {
-//     num = 7;
-//     getInfo();
-// })
-// document.querySelector('#b8').addEventListener('click', () => {
-//     num = 8;
-//     getInfo();
-// })
-// document.querySelector('#b9').addEventListener('click', () => {
-//     num = 9;
-//     getInfo();
-//})
 console.log(document.querySelectorAll('.page'));
 let btnList = document.querySelectorAll('.page');
 for (let i = 0; i < btnList.length; i++) {
     btnList[i].addEventListener('click', event => {
-        console.log(event, event.target);
-        num = i + 1;
+        console.log(event, event.target, event.target.innerText);
+        num = +event.target.innerText;
         getInfo();
+        if (num == 1) { btnPrev.setAttribute('disabled', 'disabled') }
+        if (num > 1) { btnPrev.removeAttribute('disabled', 'disabled') };
+        if (num == 9) { btnNext.setAttribute('disabled', 'disabled') }
+        if (num < 9) { btnNext.removeAttribute('disabled', 'disabled') };
     })
 }
+
+
 
 
