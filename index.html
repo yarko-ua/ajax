@@ -12,14 +12,18 @@
 <body>
     <main>
         <h1>Star Wars</h1>
-        <form action="">
-            <input type="text" name="search" id="userSearch" required
-                placeholder="Вивести всіх персонажів(тицніть нижче)">
+        <form action="#">
+            <input type="search" name="search" id="userSearch" placeholder="Вивести всіх персонажів(тицніть нижче)">
+            <select name="target" id="target">
+                <option value="people">characters</option>
+                <option value="planets">planets</option>
+                <option value="starships">starships</option>
+            </select>
             <button type="submit" id="btnSearch">Пошук</button>
         </form>
         <div id="result"></div>
         <div class="forBtn">
-            <button id="prev">prev</button>
+            <button id="prev" disabled>prev</button>
             <button id="next">next</button>
             <button id="b1" class="page">1</button>
             <button id="b2" class="page">2</button>

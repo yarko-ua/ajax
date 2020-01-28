@@ -3,14 +3,26 @@ let button = document.getElementById('btnSearch');
 let div = document.getElementById('result');
 let btnPrev = document.getElementById('prev');
 let btnNext = document.getElementById('next');
+let select = document.querySelector('select');
+let target = 'value';
+console.log(target);
+
 let num = 1;
 
 
-button.addEventListener('click', getInfo);
+function findTarget() {
+    target = select.value;
+    return target;
+}
 
-function getInfo() {
-    let name = input.value;
-    const URL = `https://swapi.co/api/people/?page=${num}`;
+
+button.addEventListener('click', show);
+
+function show() {
+    findTarget();
+    console.log(target);
+    // let name = input.value;
+    let URL = `https://swapi.co/api/${target}/?page=${num}`;   //в залежностід від вибраного таргету має бути запрос на різні категорії
     fetch(URL)
         .then(response => response.json())
         .then(data => {
@@ -22,12 +34,11 @@ function getInfo() {
             }
             div.innerHTML = arr.join('');
         });
-    btnPrev.setAttribute('disabled', 'disabled');
 }
 
 btnNext.addEventListener('click', () => {
     num++;
-    getInfo();
+    show();
     if (num == 9) { btnNext.setAttribute('disabled', 'disabled') }
     if (num < 9) { btnNext.removeAttribute('disabled', 'disabled') };
     if (num == 1) { btnPrev.setAttribute('disabled', 'disabled') }
@@ -36,20 +47,19 @@ btnNext.addEventListener('click', () => {
 
 btnPrev.addEventListener('click', () => {
     num--;
-    getInfo();
+    show();
     if (num == 1) { btnPrev.setAttribute('disabled', 'disabled') }
     if (num > 1) { btnPrev.removeAttribute('disabled', 'disabled') };
     if (num == 9) { btnNext.setAttribute('disabled', 'disabled') }
     if (num < 9) { btnNext.removeAttribute('disabled', 'disabled') };
 })
 
-console.log(document.querySelectorAll('.page'));
 let btnList = document.querySelectorAll('.page');
 for (let i = 0; i < btnList.length; i++) {
     btnList[i].addEventListener('click', event => {
         console.log(event, event.target, event.target.innerText);
         num = +event.target.innerText;
-        getInfo();
+        show();
         if (num == 1) { btnPrev.setAttribute('disabled', 'disabled') }
         if (num > 1) { btnPrev.removeAttribute('disabled', 'disabled') };
         if (num == 9) { btnNext.setAttribute('disabled', 'disabled') }
