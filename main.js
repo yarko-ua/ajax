@@ -16,9 +16,11 @@ function findTarget() {
 }
 
 
-button.addEventListener('click', show);
+button.addEventListener('click', () => {
+    showAll();
+});
 
-function show() {
+function showAll() {
     findTarget();
     console.log(target);
     // let name = input.value;
@@ -33,6 +35,22 @@ function show() {
                 arr.push(`<p>${i + 1}. ${data.results[i].name}</p>`);
             }
             div.innerHTML = arr.join('');
+        });
+}
+function show() {
+    findTarget();
+    console.log(target);
+    // let name = input.value;
+    let URL = `https://swapi.co/api/${target}/?search=${input.value}`;   //в залежностід від вибраного таргету має бути запрос на різні категорії
+    fetch(URL)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data.results);
+            console.log(data);
+            div.innerHTML = ' ';
+            for (key in data.results[0]) {
+                div.innerHTML += key + ': '[key];
+            };
         });
 }
 
@@ -67,6 +85,11 @@ for (let i = 0; i < btnList.length; i++) {
     })
 }
 
-
-
+let par = document.querySelectorAll('p');
+let modal = document.querySelector('.modal')
+for (let i = 0; i < par.length; i++) {
+    par[i].addEventListener('click', () => {
+        modal.style.display = "flex";
+    })
+}
 
